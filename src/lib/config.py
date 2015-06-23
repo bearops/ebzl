@@ -2,25 +2,8 @@ import os
 import ConfigParser
 
 
-DEFAULT_PROFILE = "test"
-
-_profiles = [DEFAULT_PROFILE]
-
-
 class NoConfigFoundException(Exception):
     pass
-
-
-def set_profiles(profiles):
-    for profile in profiles:
-        assert profile in get_profile_names()
-
-    global _profiles
-    _profiles = profiles
-
-
-def get_profiles():
-    return _profiles
 
 
 def _get_config_parser():
@@ -59,4 +42,3 @@ def get_profile_names():
     """Get available profile names."""
 
     return _get_config_parser().sections()
-

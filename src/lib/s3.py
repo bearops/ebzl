@@ -11,4 +11,3 @@ def map_region_to_location(region):
     if region.startswith("eu-"):
         return "EU"
     return region
-

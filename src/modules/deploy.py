@@ -43,4 +43,3 @@ def run(argv):
     args = get_argument_parser().parse_args(argv)
 
     deploy(args)
-

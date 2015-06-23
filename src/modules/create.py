@@ -53,7 +53,7 @@ def upload_source_bundle(args):
 
     try:
         bucket = s3_conn.get_bucket(args.s3_bucket)
-    except boto.exception.S3ResponseError as e:
+    except boto.exception.S3ResponseError:
         print "S3 bucket not found, creating: %s" % args.s3_bucket
         bucket = s3_conn.create_bucket(
             args.s3_bucket, 

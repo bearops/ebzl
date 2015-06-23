@@ -1,4 +1,3 @@
-import os
 import argparse
 
 from lib import (
@@ -55,8 +54,8 @@ def env(args):
         print "%s-%s\tansible_ssh_host=%s\tansible_ssh_user=ec2-user" % (
             args.app_name, i.id, i.private_ip_address)
 
+
 def run(argv):
     args = get_argument_parser().parse_args(argv)
 
     env(args)
-

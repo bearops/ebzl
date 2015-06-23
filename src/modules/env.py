@@ -1,4 +1,3 @@
-import os
 import argparse
 
 from lib import eb
@@ -58,4 +57,3 @@ def run(argv):
     args = get_argument_parser().parse_args(argv)
 
     env(args)
-

@@ -54,4 +54,3 @@ def run(argv):
         list_versions(args)
     else:
         list_applications(args)
-
