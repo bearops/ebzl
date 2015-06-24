@@ -1,4 +1,4 @@
-from lib import config
+from . import config
 
 from boto import ec2
 

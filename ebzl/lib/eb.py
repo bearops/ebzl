@@ -1,4 +1,4 @@
-from lib import config
+from . import config
 
 from boto import beanstalk
 from boto.beanstalk import layer1

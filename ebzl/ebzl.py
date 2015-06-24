@@ -3,15 +3,38 @@ import sys
 import argparse
 import importlib
 
+from modules import (
+    create,
+    deploy,
+    env,
+    help as help_,
+    instances,
+    list as list_
+)
+
 
 def get_module_list():
-    return [os.path.splitext(m)[0] 
-            for m in os.listdir("modules") 
-            if m.endswith(".py") and not m.startswith("_")]
+    return [
+        "create", 
+        "deploy", 
+        "env", 
+        "help", 
+        "instances", 
+        "list"
+    ]
 
 
 def get_module(name):
-    return importlib.import_module(".%s" % name, "modules")
+    d = {
+        "create": create,
+        "deploy": deploy,
+        "env": env,
+        "help": help_,
+        "instances": instances,
+        "list": list_
+    }
+
+    return d.get(name)
 
 
 def get_argument_parser():

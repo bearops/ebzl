@@ -1,7 +1,7 @@
 import os
 import argparse
 
-from lib import (
+from ..lib import (
     eb,
     s3
 )

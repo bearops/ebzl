@@ -1,6 +1,6 @@
 import boto
 
-from lib import config
+from . import config
 
 
 def get_connection(profile_name):
