@@ -1,6 +1,6 @@
 import argparse
 
-from ..lib import eb
+from .. lib import eb
 
 import boto
 

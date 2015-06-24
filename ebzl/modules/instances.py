@@ -1,6 +1,6 @@
 import argparse
 
-from ..lib import (
+from .. lib import (
     eb,
     ec2
 )

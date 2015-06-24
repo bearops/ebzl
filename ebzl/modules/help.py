@@ -2,6 +2,36 @@ import os
 import argparse
 import importlib
 
+from .. modules import (
+    create,
+    deploy,
+    env,
+    instances,
+    list as list_
+)
+
+
+def get_module_list():
+    return [
+        "create", 
+        "deploy", 
+        "env", 
+        "instances", 
+        "list"
+    ]
+
+
+def get_module(name):
+    d = {
+        "create": create,
+        "deploy": deploy,
+        "env": env,
+        "instances": instances,
+        "list": list_
+    }
+
+    return d.get(name)
+
 
 def get_argument_parser():
     parser = argparse.ArgumentParser()
@@ -10,16 +40,6 @@ def get_argument_parser():
                         help="Ebzl module.")
 
     return parser
-
-
-def get_module_list():
-    return [os.path.splitext(m)[0] 
-            for m in os.listdir("modules") 
-            if m.endswith(".py") and not m.startswith("_")]
-
-
-def get_module(name):
-    return importlib.import_module(".%s" % name, "modules")
 
 
 def run(argv):

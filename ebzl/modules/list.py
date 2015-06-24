@@ -1,4 +1,4 @@
-from ..lib import eb
+from .. lib import eb
 import argparse
 import boto
 
