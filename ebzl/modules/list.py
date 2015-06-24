@@ -1,28 +1,28 @@
 from .. lib import eb
 import argparse
-import boto
 
 
 def get_argument_parser():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-a", "--app-name", 
-                        required=False, 
+    parser.add_argument("-a", "--app-name",
+                        required=False,
                         help="ElasticBeanstalk application name.")
-    
+
     parser.add_argument("-p", "--profile",
                         required=True,
                         help="AWS credentials profile.")
-    
+
     parser.add_argument("-r", "--region",
                         required=True,
-                        help="AWS region (only needed if the S3 buckets needs to be created).")
+                        help=("AWS region (only needed if the S3 buckets "
+                              "needs to be created)."))
 
     return parser
 
 
 def list_versions(args):
-    layer1 = eb.get_layer1(profile=args.profile, 
+    layer1 = eb.get_layer1(profile=args.profile,
                            region=args.region)
     data = layer1.describe_application_versions(application_name=args.app_name)
 
@@ -35,7 +35,7 @@ def list_versions(args):
 
 
 def list_applications(args):
-    layer1 = eb.get_layer1(profile=args.profile, 
+    layer1 = eb.get_layer1(profile=args.profile,
                            region=args.region)
     data = layer1.describe_applications()
 

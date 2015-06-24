@@ -1,7 +1,5 @@
-import os
 import sys
 import argparse
-import importlib
 
 from modules import (
     create,
@@ -15,11 +13,11 @@ from modules import (
 
 def get_module_list():
     return [
-        "create", 
-        "deploy", 
-        "env", 
-        "help", 
-        "instances", 
+        "create",
+        "deploy",
+        "env",
+        "help",
+        "instances",
         "list"
     ]
 

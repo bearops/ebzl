@@ -13,5 +13,5 @@ def get_region(region_name):
 
 
 def get_layer1(profile, region):
-    return layer1.Layer1(*config.get_credentials(profile), 
+    return layer1.Layer1(*config.get_credentials(profile),
                          region=get_region(region))

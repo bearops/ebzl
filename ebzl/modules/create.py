@@ -16,8 +16,8 @@ def get_argument_parser():
                         required=True,
                         help="AWS credentials profile.")
 
-    parser.add_argument("-a", "--app-name", 
-                        required=True, 
+    parser.add_argument("-a", "--app-name",
+                        required=True,
                         help="ElasticBeanstalk application name.")
 
     parser.add_argument("-v", "--version",
@@ -33,7 +33,8 @@ def get_argument_parser():
 
     parser.add_argument("-r", "--region",
                         required=True,
-                        help="AWS region (only needed if the S3 buckets needs to be created).")
+                        help=("AWS region (only needed if the S3 buckets "
+                              "needs to be created)."))
 
     parser.add_argument("-f", "--force",
                         action="store_true",
@@ -56,17 +57,17 @@ def upload_source_bundle(args):
     except boto.exception.S3ResponseError:
         print "S3 bucket not found, creating: %s" % args.s3_bucket
         bucket = s3_conn.create_bucket(
-            args.s3_bucket, 
+            args.s3_bucket,
             location=s3.map_region_to_location(args.region))
 
     key = boto.s3.key.Key(
-        bucket, 
+        bucket,
         get_source_bundle_key_name(args.app_name, args.version))
 
     if key.exists() and not args.force:
         print "Key already exists: %s (pass --force to overwrite)" % key.name
         exit()
-    
+
     with open(source_bundle_path, "rb") as f:
         key.set_contents_from_file(f)
 
@@ -81,7 +82,7 @@ def create_eb_version(args):
         "version_label": args.version,
         "description": args.version,
         "s3_bucket": args.s3_bucket,
-        "s3_key": get_source_bundle_key_name(args.app_name, 
+        "s3_key": get_source_bundle_key_name(args.app_name,
                                              args.version)
     }
 
@@ -90,11 +91,10 @@ def create_eb_version(args):
     except boto.exception.BotoServerError as exc:
         print exc.message
         exit()
-    
+
 
 def run(argv):
     args = get_argument_parser().parse_args(argv)
 
     upload_source_bundle(args)
     create_eb_version(args)
-

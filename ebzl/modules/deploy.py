@@ -6,8 +6,8 @@ import boto
 def get_argument_parser():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-e", "--env-name", 
-                        required=True, 
+    parser.add_argument("-e", "--env-name",
+                        required=True,
                         help="ElasticBeanstalk environment name.")
 
     parser.add_argument("-v", "--version",
@@ -20,8 +20,9 @@ def get_argument_parser():
 
     parser.add_argument("-r", "--region",
                         required=True,
-                        help="AWS region (only needed if the S3 buckets needs to be created).")
-    
+                        help=("AWS region (only needed if the S3 buckets "
+                              "needs to be created)."))
+
     return parser
 
 
@@ -30,9 +31,9 @@ def deploy(args):
         "environment_name": args.env_name,
         "version_label": args.version
     }
-    
+
     layer1 = eb.get_layer1(profile=args.profile, region=args.region)
-    
+
     try:
         layer1.update_environment(**kwargs)
     except boto.exception.BotoServerError as exc:

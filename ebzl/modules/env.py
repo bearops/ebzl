@@ -11,25 +11,26 @@ def get_argument_parser():
     parser.add_argument("-p", "--profile",
                         required=True,
                         help="AWS credentials profile.")
-    
-    parser.add_argument("-a", "--app-name", 
-                        required=True, 
+
+    parser.add_argument("-a", "--app-name",
+                        required=True,
                         help="ElasticBeanstalk application name.")
-    
-    parser.add_argument("-e", "--env-name", 
-                        required=True, 
+
+    parser.add_argument("-e", "--env-name",
+                        required=True,
                         help="ElasticBeanstalk environment name.")
 
     parser.add_argument("-r", "--region",
                         required=True,
-                        help="AWS region (only needed if the S3 buckets needs to be created).")
+                        help=("AWS region (only needed if the S3 buckets "
+                              "needs to be created)."))
 
     return parser
 
 
 def env(args):
     layer1 = eb.get_layer1(profile=args.profile, region=args.region)
-    
+
     try:
         data = layer1.describe_configuration_settings(
             application_name=args.app_name,

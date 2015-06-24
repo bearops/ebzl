@@ -1,6 +1,4 @@
-import os
 import argparse
-import importlib
 
 from .. modules import (
     create,
@@ -13,10 +11,10 @@ from .. modules import (
 
 def get_module_list():
     return [
-        "create", 
-        "deploy", 
-        "env", 
-        "instances", 
+        "create",
+        "deploy",
+        "env",
+        "instances",
         "list"
     ]
 
@@ -36,7 +34,7 @@ def get_module(name):
 def get_argument_parser():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("action", 
+    parser.add_argument("action",
                         help="Ebzl module.")
 
     return parser
