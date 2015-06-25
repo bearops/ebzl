@@ -42,4 +42,9 @@ def get_argument_parser():
 
 def run(argv):
     args = get_argument_parser().parse_args(argv)
-    get_module(args.action).get_argument_parser().print_help()
+    try:
+        get_module(args.action).get_argument_parser().print_help()
+    except AttributeError:
+        print "Module not found: %s" % args.action
+        exit()
+
