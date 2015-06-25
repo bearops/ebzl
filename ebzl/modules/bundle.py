@@ -29,7 +29,6 @@ def get_argument_parser():
                         required=True,
                         help="Version label.")
 
-
     parser.add_argument("--s3-bucket",
                         default="build-deps",
                         help="AWS S3 bucket containing Docker Hub credentials.")
