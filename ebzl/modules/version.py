@@ -14,6 +14,11 @@ def get_git_output(git_command):
 
 def get_version():
     try:
+        get_git_output("git log 2>/dev/null")
+    except subprocess.CalledProcessError:
+        raise ValueError("Not a git repository.")
+
+    try:
         tag = get_git_output("git describe --exact-match --abbrev=0 2>/dev/null")
     except subprocess.CalledProcessError:
         tag = None
@@ -27,6 +32,9 @@ def get_version():
 
 
 def run(argv):
-    print get_version()
+    try:
+        print get_version()
+    except ValueError as exc:
+        print "Error: %s" % exc
 
 
