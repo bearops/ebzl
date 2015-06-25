@@ -65,7 +65,7 @@ def get_docker_run_contents(args):
 
 
 def get_source_bundle_file_path(args):
-    path = args.source_bundle
+    path = os.path.abspath(os.path.expanduser(args.source_bundle))
 
     if os.path.isfile(path) and not args.force:
         raise ValueError("Already exists, pass --force to overwrite: %s" % path)
@@ -74,9 +74,8 @@ def get_source_bundle_file_path(args):
         return path
        
     elif os.path.isdir(path):
-        return os.path.join(os.path.expanduser(path), 
-                            DEFAULT_SOURCE_BUNDLE_NAME)
-    
+        return os.path.join(path, DEFAULT_SOURCE_BUNDLE_NAME)
+
     if not os.path.exists(path):
         dir_ = os.path.dirname(path)
         if not os.path.isdir(dir_):
