@@ -3,6 +3,7 @@ import argparse
 
 from modules import (
     create,
+    bundle,
     deploy,
     env,
     help as help_,
@@ -11,28 +12,23 @@ from modules import (
 )
 
 
+_MODULES = {
+    "create": create,
+    "bundle": bundle,
+    "deploy": deploy,
+    "env": env,
+    "help": help_,
+    "instances": instances,
+    "list": list_
+}
+
+
 def get_module_list():
-    return [
-        "create",
-        "deploy",
-        "env",
-        "help",
-        "instances",
-        "list"
-    ]
+    return _MODULES.keys()
 
 
 def get_module(name):
-    d = {
-        "create": create,
-        "deploy": deploy,
-        "env": env,
-        "help": help_,
-        "instances": instances,
-        "list": list_
-    }
-
-    return d.get(name)
+    return _MODULES.get(name)
 
 
 def get_argument_parser():
