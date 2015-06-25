@@ -29,6 +29,7 @@ def get_argument_parser():
                         help="ElasticBeanstalk source bundle archive.")
 
     parser.add_argument("--s3-bucket",
+                        required=True,
                         help="Source bundle destination AWS S3 bucket.")
 
     parser.add_argument("-r", "--region",
