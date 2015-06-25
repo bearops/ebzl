@@ -1,31 +1,37 @@
 import argparse
 
 from .. modules import (
+    bundle,
     create,
     deploy,
     env,
     instances,
-    list as list_
+    list as list_,
+    version
 )
 
 
 def get_module_list():
     return [
+        "bundle",
         "create",
         "deploy",
         "env",
         "instances",
-        "list"
+        "list",
+        "version"
     ]
 
 
 def get_module(name):
     d = {
+        "bundle": bundle,
         "create": create,
         "deploy": deploy,
         "env": env,
         "instances": instances,
-        "list": list_
+        "list": list_,
+        "version": version
     }
 
     return d.get(name)

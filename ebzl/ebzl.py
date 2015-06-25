@@ -2,24 +2,26 @@ import sys
 import argparse
 
 from modules import (
-    create,
     bundle,
+    create,
     deploy,
     env,
     help as help_,
     instances,
-    list as list_
+    list as list_,
+    version
 )
 
 
 _MODULES = {
-    "create": create,
     "bundle": bundle,
+    "create": create,
     "deploy": deploy,
     "env": env,
     "help": help_,
     "instances": instances,
-    "list": list_
+    "list": list_,
+    "version": version
 }
 
 
