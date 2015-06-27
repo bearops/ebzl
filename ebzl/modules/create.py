@@ -3,26 +3,21 @@ import argparse
 
 from .. lib import (
     eb,
-    s3
+    s3,
+    parameters
 )
 
 import boto
 
 
 def get_argument_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser("ebzl create")
 
-    parser.add_argument("-p", "--profile",
-                        required=True,
-                        help="AWS credentials profile.")
-
-    parser.add_argument("-a", "--app-name",
-                        required=True,
-                        help="ElasticBeanstalk application name.")
-
-    parser.add_argument("-v", "--version",
-                        required=True,
-                        help="Version label.")
+    parameters.add_profile(parser)
+    parameters.add_app_name(parser)
+    parameters.add_version_label(parser)
+    parameters.add_region(parser, required=False)
+    parameters.add_force(parser)
 
     parser.add_argument("-s", "--source-bundle",
                         required=True,
@@ -31,15 +26,6 @@ def get_argument_parser():
     parser.add_argument("--s3-bucket",
                         required=True,
                         help="Source bundle destination AWS S3 bucket.")
-
-    parser.add_argument("-r", "--region",
-                        required=True,
-                        help=("AWS region (only needed if the S3 buckets "
-                              "needs to be created)."))
-
-    parser.add_argument("-f", "--force",
-                        action="store_true",
-                        help="Force, overwrite & burn things in the process.")
 
     return parser
 
@@ -95,7 +81,9 @@ def create_eb_version(args):
 
 
 def run(argv):
-    args = get_argument_parser().parse_args(argv)
+    args = parameters.parse(parser=get_argument_parser(),
+                            argv=argv,
+                            postprocessors=[parameters.add_default_region])
 
     upload_source_bundle(args)
     create_eb_version(args)

@@ -38,7 +38,7 @@ def get_module(name):
 
 
 def get_argument_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser("ebzl help")
 
     parser.add_argument("action",
                         help="Ebzl module.")
@@ -53,4 +53,3 @@ def run(argv):
     except AttributeError:
         print "Module not found: %s" % args.action
         exit()
-

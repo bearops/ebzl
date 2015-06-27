@@ -2,7 +2,7 @@ import argparse
 import subprocess
 
 def get_argument_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser("ebzl version")
 
     return parser
 

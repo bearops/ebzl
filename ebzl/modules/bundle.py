@@ -4,30 +4,23 @@ import zipfile
 import argparse
 
 from .. lib import (
-    eb,
-    s3
+    parameters
 )
-
-import boto
 
 
 DEFAULT_SOURCE_BUNDLE_NAME = "source-bundle.zip"
 
 
 def get_argument_parser():
-    parser = argparse.ArgumentParser()
-    
-    parser.add_argument("-f", "--force",
-                        action="store_true",
-                        help="Force, overwrite & burn things in the process.")
-    
+    parser = argparse.ArgumentParser("ebzl bundle")
+
+    parameters.add_profile(parser)
+    parameters.add_app_name(parser)
+    parameters.add_region(parser, required=False)
+
     parser.add_argument("-d", "--docker-image",
                         default=True,
                         help="Docker image name.")
-
-    parser.add_argument("-v", "--version",
-                        required=True,
-                        help="Version label.")
 
     parser.add_argument("--s3-bucket",
                         default="build-deps",
@@ -56,7 +49,7 @@ def get_docker_run_contents(args):
             "Key": args.s3_key
         },
         "Ports": [{
-             "ContainerPort": "80"
+            "ContainerPort": "80"
         }],
         "Logging": "/home/dubizzle/logs/user"
     }
@@ -91,16 +84,14 @@ def write_source_bundle(path, dockerrun_contents):
 
 
 def run(argv):
-    args = get_argument_parser().parse_args(argv)
+    args = parameters.parse(parser=get_argument_parser(),
+                            argv=argv)
 
     try: 
         path = get_source_bundle_file_path(args)
     except ValueError as exc:
-        print "Incorrect source bunde path: %s" % exc
+        print "Incorrect source bundle path: %s" % exc
         exit()
 
     dockerrun_contents = get_docker_run_contents(args)
-
     write_source_bundle(path, dockerrun_contents)
-   
-
