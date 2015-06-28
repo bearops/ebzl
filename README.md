@@ -12,7 +12,7 @@ python setup.py install
 
 # Config
 
-`ebzl` will read AWS credentials from `$HOME/.aws/credentials`.
+`ebzl` will read AWS credentials from `$HOME/.aws/credentials` and region defaults from `$HOME/.aws/config`.
 
 # Usage
 
