@@ -1,23 +1,26 @@
 #!/usr/bin/env python
-from . import config
+from . import (
+    config,
+    format as fmt
+)
 
 
-def add_profile(parser):
+def add_profile(parser, required=True):
     parser.add_argument("-p", "--profile",
-                        required=True,
+                        required=required,
                         choices=config.get_profile_names(),
                         help="AWS credentials profile.")
 
 
-def add_app_name(parser):
+def add_app_name(parser, required=True):
     parser.add_argument("-a", "--app-name",
-                        required=True,
+                        required=required,
                         help="ElasticBeanstalk application name.")
 
 
-def add_version_label(parser):
+def add_version_label(parser, required=True):
     parser.add_argument("-v", "--version",
-                        required=True,
+                        required=required,
                         help="Version label.")
 
 
@@ -29,9 +32,16 @@ def add_region(parser, required=True):
 
 
 def add_force(parser):
-    parser.add_argument("-f", "--force",
+    parser.add_argument("-F", "--force",
                         action="store_true",
                         help="Force, overwrite & burn things in the process.")
+
+
+def add_format(parser, default=fmt.TEXT, choices=fmt.CHOICES):
+    parser.add_argument("f", "--format",
+                        default=default,
+                        choices=choices,
+                        help="Output format.")
 
 
 def parse(parser, argv, postprocessors=None):
