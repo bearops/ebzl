@@ -5,6 +5,14 @@ from . import (
 )
 
 
+APP_ARGS = ("-a", "--app-name")
+
+APP_KWARGS = {
+    "required": False,
+    "help": "ElaticBeanstalk application name."
+}
+
+
 def add_profile(parser, required=True):
     parser.add_argument("-p", "--profile",
                         required=required,
@@ -13,9 +21,10 @@ def add_profile(parser, required=True):
 
 
 def add_app_name(parser, required=True):
-    parser.add_argument("-a", "--app-name",
-                        required=required,
-                        help="ElasticBeanstalk application name.")
+    kwargs = APP_KWARGS
+    kwargs["required"] = required
+
+    parser.add_argument(*APP_ARGS, **kwargs)
 
 
 def add_version_label(parser, required=True):

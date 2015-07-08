@@ -13,12 +13,17 @@ def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl instances")
     
     parameters.add_profile(parser)
-    parameters.add_app_name(parser)
     parameters.add_region(parser, required=False)
 
-    parser.add_argument("-e", "--env-name",
-                        required=True,
-                        help="ElasticBeanstalk environment name.")
+    group = parser.add_mutually_exclusive_group(required=True)
+
+    eb_group = group.add_argument_group()
+    eb_group.add_argument(*parameters.APP_ARGS, **parameters.APP_KWARGS)
+    eb_group.add_argument("-e", "--env-name",
+                          help="ElasticBeanstalk environment name.")
+
+    group.add_argument("-n", "--name",
+                       help="Instance Name (tag).")
 
     return parser
 
@@ -48,9 +53,27 @@ def env(args):
             args.app_name, i.id, i.private_ip_address)
 
 
+def instance(args):
+    ec2_conn = ec2.get_connection(args.profile, args.region)
+    instances = ec2_conn.get_only_instances(filters={"tag:Name": args.name})
+
+    for i in instances:
+        if i.state != "running":
+            continue
+
+        i.ip_address = i.ip_address or ""
+
+        print "%s %s %s" % (i.id,
+                            i.ip_address.center(15),
+                            i.private_ip_address.center(15))
+
+
 def run(argv):
     args = parameters.parse(parser=get_argument_parser(),
                             argv=argv,
                             postprocessors=[parameters.add_default_region])
 
-    env(args)
+    if args.env_name:
+        env(args)
+    else:
+        instance(args)
