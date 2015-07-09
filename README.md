@@ -5,9 +5,7 @@ Ebizzle 1.0 -- a Python wrapper for easier AWS ElasticBeanstalk applications and
 # Install
 
 ```bash
-git clone https://github.com/bearops/ebzl.git
-cd ebzl
-python setup.py install
+pip install ebzl
 ```
 
 # Config
