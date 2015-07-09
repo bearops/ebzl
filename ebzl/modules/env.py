@@ -30,7 +30,7 @@ def env(args):
             application_name=args.app_name,
             environment_name=args.env_name)
     except boto.exception.BotoServerError as exc:
-        print exc.message
+        print(exc.message)
         return
 
     env_vars = (data["DescribeConfigurationSettingsResponse"]
@@ -44,8 +44,8 @@ def env(args):
     env_vars = {v["OptionName"]: v["Value"] for v in env_vars
                 if v["Namespace"] == aws_env_var_option}
 
-    for key, value in env_vars.iteritems():
-        print "%s = %s" % (key, value)
+    for key, value in env_vars.items():
+        print("%s = %s" % (key, value))
 
 
 def run(argv):

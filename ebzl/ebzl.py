@@ -1,7 +1,7 @@
 import sys
 import argparse
 
-from modules import (
+from .modules import (
     bundle,
     create,
     deploy,
@@ -26,7 +26,7 @@ _MODULES = {
 
 
 def get_module_list():
-    return _MODULES.keys()
+    return list(_MODULES.keys())
 
 
 def get_module(name):

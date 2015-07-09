@@ -90,7 +90,7 @@ def run(argv):
     try: 
         path = get_source_bundle_file_path(args)
     except ValueError as exc:
-        print "Incorrect source bundle path: %s" % exc
+        print("Incorrect source bundle path: %s" % exc)
         exit()
 
     dockerrun_contents = get_docker_run_contents(args)

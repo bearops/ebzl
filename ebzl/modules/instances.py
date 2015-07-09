@@ -35,7 +35,7 @@ def env(args):
         data = layer1.describe_environment_resources(
             environment_name=args.env_name)
     except boto.exception.BotoServerError as exc:
-        print exc.message
+        print(exc.message)
         return
 
     instance_ids = (data["DescribeEnvironmentResourcesResponse"]
@@ -49,8 +49,8 @@ def env(args):
     instances = ec2_conn.get_only_instances(instance_ids=instance_ids)
 
     for i in instances:
-        print "%s-%s\tansible_ssh_host=%s\tansible_ssh_user=ec2-user" % (
-            args.app_name, i.id, i.private_ip_address)
+        print("%s-%s\tansible_ssh_host=%s\tansible_ssh_user=ec2-user" % (
+            args.app_name, i.id, i.private_ip_address))
 
 
 def instance(args):
@@ -63,9 +63,9 @@ def instance(args):
 
         i.ip_address = i.ip_address or ""
 
-        print "%s %s %s" % (i.id,
+        print("%s %s %s" % (i.id,
                             i.ip_address.center(15),
-                            i.private_ip_address.center(15))
+                            i.private_ip_address.center(15)))
 
 
 def run(argv):

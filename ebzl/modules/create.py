@@ -42,7 +42,7 @@ def upload_source_bundle(args):
     try:
         bucket = s3_conn.get_bucket(args.s3_bucket)
     except boto.exception.S3ResponseError:
-        print "S3 bucket not found, creating: %s" % args.s3_bucket
+        print("S3 bucket not found, creating: %s" % args.s3_bucket)
         bucket = s3_conn.create_bucket(
             args.s3_bucket,
             location=s3.map_region_to_location(args.region))
@@ -52,7 +52,7 @@ def upload_source_bundle(args):
         get_source_bundle_key_name(args.app_name, args.version))
 
     if key.exists() and not args.force:
-        print "Key already exists: %s (pass --force to overwrite)" % key.name
+        print("Key already exists: %s (pass --force to overwrite)" % key.name)
         exit()
 
     with open(source_bundle_path, "rb") as f:
@@ -76,7 +76,7 @@ def create_eb_version(args):
     try:
         layer1.create_application_version(**kwargs)
     except boto.exception.BotoServerError as exc:
-        print exc.message
+        print(exc.message)
         exit()
 
 

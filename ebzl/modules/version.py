@@ -33,8 +33,8 @@ def get_version():
 
 def run(argv):
     try:
-        print get_version()
+        print(get_version())
     except ValueError as exc:
-        print "Error: %s" % exc
+        print("Error: %s" % exc)
 
 

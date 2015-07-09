@@ -1,5 +1,8 @@
 import os
-import ConfigParser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 
 
 class NoConfigFoundException(Exception):
@@ -7,7 +10,7 @@ class NoConfigFoundException(Exception):
 
 
 def _get_config_parser(path):
-    config_parser = ConfigParser.ConfigParser()
+    config_parser = configparser.ConfigParser()
 
     try:
         with open(os.path.expanduser(path), "rb") as f:
@@ -68,12 +71,12 @@ def get_default_region(profile):
 
     try:
         return config.get("profile %s" % profile, "region")
-    except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+    except (configparser.NoSectionError, configparser.NoOptionError):
         pass
 
     try:
         return config.get("default", "region")
-    except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+    except (configparser.NoSectionError, configparser.NoOptionError):
         pass
 
     return None

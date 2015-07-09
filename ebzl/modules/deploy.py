@@ -32,7 +32,7 @@ def deploy(args):
     try:
         layer1.update_environment(**kwargs)
     except boto.exception.BotoServerError as exc:
-        print exc.message
+        print(exc.message)
 
 
 def run(argv):

@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-07-09
+- Python 3 compatibility
+
 ## 2015-07-08
 - instances: get EC2 instances by name with `ebzl instances -n InstanceName`,
   displays instance id, public and private IP (if exists)

@@ -26,7 +26,7 @@ def list_versions(args):
                     ["ApplicationVersions"])
 
     for version in versions:
-        print version["VersionLabel"]
+        print(version["VersionLabel"])
 
 
 def list_applications(args):
@@ -39,7 +39,7 @@ def list_applications(args):
                 ['Applications'])
 
     for app in apps:
-        print app["ApplicationName"]
+        print(app["ApplicationName"])
 
 
 def run(argv):

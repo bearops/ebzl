@@ -51,5 +51,5 @@ def run(argv):
     try:
         get_module(args.action).get_argument_parser().print_help()
     except AttributeError:
-        print "Module not found: %s" % args.action
+        print("Module not found: %s" % args.action)
         exit()

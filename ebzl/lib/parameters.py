@@ -63,7 +63,7 @@ def parse(parser, argv, postprocessors=None):
             postprocessor(parser=parser, args=args)
         except Exception as exc:
             parser.print_usage()
-            print exc
+            print(exc)
             exit()
 
     return args

@@ -19,21 +19,21 @@ def print_dict(dictionary, format_=None):
     format_ = format_ or DEFAULT
 
     if format_ == TEXT:
-        for key, value in iter(sorted(dictionary.iteritems())):
-            print "%s = %s" % (key, value)
+        for key, value in iter(sorted(dictionary.items())):
+            print("%s = %s" % (key, value))
     elif format_ == DOCKERENV:
-        for key, value in iter(sorted(dictionary.iteritems())):
-            print "%s=%s" % (key, value)
+        for key, value in iter(sorted(dictionary.items())):
+            print("%s=%s" % (key, value))
     elif format_ == BASH:
-        for key, value in iter(sorted(dictionary.iteritems())):
-            print "export %s=%s" % (key, value)
+        for key, value in iter(sorted(dictionary.items())):
+            print("export %s=%s" % (key, value))
     elif format_ == JSON:
-        print json.dumps(dictionary)
+        print(json.dumps(dictionary))
     elif format_ == NAME_VALUE_DICT:
-        print "["
-        for key, value in iter(sorted(dictionary.iteritems())):
-            print '{"name": "%s", "value": "%s"},' % (key, value)
-        print "]"
+        print("[")
+        for key, value in iter(sorted(dictionary.items())):
+            print('{"name": "%s", "value": "%s"},' % (key, value))
+        print("]")
 
 
 def print_list(list_, format_=None):
@@ -43,9 +43,9 @@ def print_list(list_, format_=None):
 
     if format_ == TEXT:
         for item in list_:
-            print item
+            print(item)
     elif format_ == JSON:
-        print json.dumps(list_)
+        print(json.dumps(list_))
 
 
 def print_profile(profile, format_=None):
@@ -54,6 +54,6 @@ def print_profile(profile, format_=None):
     format_ = format_ or DEFAULT
 
     if format_ == TEXT:
-        print "[profile:%s]" % profile
+        print("[profile:%s]" % profile)
     elif format_ == BASH:
-        print "# profile: %s" % profile
+        print("# profile: %s" % profile)
