@@ -16,12 +16,8 @@ def get_argument_parser():
     parameters.add_region(parser, required=False)
 
     group = parser.add_mutually_exclusive_group(required=True)
-
-    eb_group = group.add_argument_group()
-    eb_group.add_argument(*parameters.APP_ARGS, **parameters.APP_KWARGS)
-    eb_group.add_argument("-e", "--env-name",
-                          help="ElasticBeanstalk environment name.")
-
+    group.add_argument("-e", "--env-name",
+                       help="ElasticBeanstalk environment name.")
     group.add_argument("-n", "--name",
                        help="Instance Name (tag).")
 
@@ -50,7 +46,7 @@ def env(args):
 
     for i in instances:
         print("%s-%s\tansible_ssh_host=%s\tansible_ssh_user=ec2-user" % (
-            args.app_name, i.id, i.private_ip_address))
+            args.env_name, i.id, i.private_ip_address))
 
 
 def instance(args):

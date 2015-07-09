@@ -12,7 +12,6 @@ def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl env")
     
     parameters.add_profile(parser)
-    parameters.add_app_name(parser)
     parameters.add_region(parser, required=False)
 
     parser.add_argument("-e", "--env-name",
@@ -27,7 +26,7 @@ def env(args):
 
     try:
         data = layer1.describe_configuration_settings(
-            application_name=args.app_name,
+            application_name=None,
             environment_name=args.env_name)
     except boto.exception.BotoServerError as exc:
         print(exc.message)

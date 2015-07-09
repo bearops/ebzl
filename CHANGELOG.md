@@ -1,6 +1,8 @@
 # Change log
 
 ## 2015-07-09
+- Added ebzl to PyPi: https://pypi.python.org/pypi/ebzl
+- Don't require --app-name in env & instances anymore
 - Python 3 compatibility
 
 ## 2015-07-08
