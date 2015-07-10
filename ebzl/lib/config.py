@@ -1,3 +1,5 @@
+"""Helper module for parsing AWS ini config files."""
+
 import os
 try:
     import configparser
@@ -5,52 +7,45 @@ except ImportError:
     import ConfigParser as configparser
 
 
+AWS_CLI_CREDENTIALS_PATH = "~/.aws/credentials"
+
+AWS_CLI_CONFIG_PATH = "~/.aws/config"
+
+
 class NoConfigFoundException(Exception):
+    """Config file not present."""
+
     pass
 
 
 def _get_config_parser(path):
+    """Open and parse given config.
+
+    :type path: basestring
+    :rtype: ConfigParser.ConfigParser
+    """
+
     config_parser = configparser.ConfigParser()
 
     try:
         with open(os.path.expanduser(path), "rb") as f:
             config_parser.readfp(f)
     except IOError:
-        return None
+        raise NoConfigFoundException(
+            "Can't find the config file: %s"
+            % config_paths)
     else:
         return config_parser
 
 
-def _get_credentials_data():
-    """Return ebizzle's config."""
-
-    config_paths = [
-        "~/.aws/credentials"
-    ]
-
-    for config_path in config_paths:
-        config_parser = _get_config_parser(config_path)
-        if config_parser is not None:
-            return config_parser
-    raise NoConfigFoundException(
-        "Can't find a config file in any of the locations: %s"
-        % config_paths)
-
-
-def _get_config_data(config_path="~/.aws/config"):
-    parser = _get_config_parser(config_path)
-
-    if parser is not None:
-        return parser
-
-    raise NoConfigFoundException("Can't find the config file: %s" 
-                                 % config_path)
-
-
 def get_credentials(profile):
-    """Returns credentials for given profile as a (key, secret) tuple."""
+    """Returns credentials for given profile as a (key, secret) tuple.
 
-    config = _get_credentials_data()
+    :type profile: basestring
+    :rtype: tuple
+    """
+
+    config = _get_config_parser(path=AWS_CLI_CREDENTIALS_PATH)
 
     key = config.get(profile, "aws_access_key_id")
     secret = config.get(profile, "aws_secret_access_key")
@@ -59,15 +54,24 @@ def get_credentials(profile):
 
 
 def get_profile_names():
-    """Get available profile names."""
+    """Get available profile names.
 
-    return _get_credentials_data().sections()
+    :rtype: list
+    :returns: list of profile names (strings)
+    """
+
+    return _get_config_parser(path=AWS_CLI_CREDENTIALS_PATH).sections()
 
 
 def get_default_region(profile):
-    """Get the default region for given profile from AWS CLI tool's config."""
+    """Get the default region for given profile from AWS CLI tool's config.
 
-    config = _get_config_data()
+    :type profile: basestring
+    :rtype: basestring
+    :returns: name of defalt region if defined in config, None otherwise
+    """
+
+    config = _get_config_parser(path=AWS_CLI_CONFIG_PATH)
 
     try:
         return config.get("profile %s" % profile, "region")

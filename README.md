@@ -1,6 +1,6 @@
 # ebzl
 
-Ebizzle 1.0 -- a Python wrapper for easier AWS ElasticBeanstalk applications and environments management.
+A helper tool for easier AWS ElasticBeanstalk applications and environments management.
 
 # Install
 

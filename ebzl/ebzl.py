@@ -26,14 +26,26 @@ _MODULES = {
 
 
 def get_module_list():
+    """List of available modules' names.
+
+    :rtype: list
+    """
+
     return list(_MODULES.keys())
 
 
 def get_module(name):
+    """Get module object by name.
+
+    :rtype: module or None
+    :returns: module object or None if doesn't exist
+    """
+
     return _MODULES.get(name)
 
 
 def get_argument_parser():
+    """Default argument parser."""
     parser = argparse.ArgumentParser()
 
     parser.add_argument("action",
@@ -44,6 +56,8 @@ def get_argument_parser():
 
 
 def main():
+    """Entry point. Parse argument and run the given module."""
+
     parser = get_argument_parser()
     args = parser.parse_args(sys.argv[1:2])
     get_module(args.action).run(sys.argv[2:])

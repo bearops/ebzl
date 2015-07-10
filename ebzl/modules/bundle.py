@@ -62,10 +62,8 @@ def get_source_bundle_file_path(args):
 
     if os.path.isfile(path) and not args.force:
         raise ValueError("Already exists, pass --force to overwrite: %s" % path)
-    
     elif os.path.isfile(path):
         return path
-       
     elif os.path.isdir(path):
         return os.path.join(path, DEFAULT_SOURCE_BUNDLE_NAME)
 

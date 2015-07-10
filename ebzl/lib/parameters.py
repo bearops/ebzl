@@ -1,16 +1,9 @@
-#!/usr/bin/env python
+"""Input parameters commons."""
+
 from . import (
     config,
     format as fmt
 )
-
-
-APP_ARGS = ("-a", "--app-name")
-
-APP_KWARGS = {
-    "required": False,
-    "help": "ElaticBeanstalk application name."
-}
 
 
 def add_profile(parser, required=True):
@@ -21,10 +14,10 @@ def add_profile(parser, required=True):
 
 
 def add_app_name(parser, required=True):
-    kwargs = APP_KWARGS
     kwargs["required"] = required
-
-    parser.add_argument(*APP_ARGS, **kwargs)
+    parser.add_argument("-a", "--app-name",
+                        required=required,
+                        help="ElasticBeanstalk application name.")
 
 
 def add_version_label(parser, required=True):
