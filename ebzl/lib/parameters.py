@@ -14,7 +14,6 @@ def add_profile(parser, required=True):
 
 
 def add_app_name(parser, required=True):
-    kwargs["required"] = required
     parser.add_argument("-a", "--app-name",
                         required=required,
                         help="ElasticBeanstalk application name.")
