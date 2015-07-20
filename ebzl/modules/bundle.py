@@ -20,7 +20,7 @@ def get_argument_parser():
     parameters.add_version_label(parser)
 
     parser.add_argument("-d", "--docker-image",
-                        default=True,
+                        required=True,
                         help="Docker image name.")
 
     parser.add_argument("--s3-bucket",
