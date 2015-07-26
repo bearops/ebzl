@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-07-26
+- set environment variables with `ebzl env -v FOO=BAR`
+
 ## 2015-07-21
 - `bundle` bug fixes
 
