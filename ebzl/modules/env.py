@@ -84,11 +84,6 @@ def env_set(args):
         with open(os.path.expanduser(args.var_file), "rb") as f:
             option_settings.extend(map(parse_var_entry, f.readlines()))
 
-    if option_settings:
-        print "VAR FILE:"
-        for t, k, v in option_settings:
-            print "  %s = %s" % (k, v)
-
     for var in args.var:
         entry = parse_var_entry(var)
 
