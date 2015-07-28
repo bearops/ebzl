@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-07-28
+- set environment variables with `ebzl env --env-file PATH`
+
 ## 2015-07-26
 - set environment variables with `ebzl env -v FOO=BAR`
 

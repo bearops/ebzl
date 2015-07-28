@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 import argparse
 
 from .. lib import (
@@ -25,7 +26,12 @@ def get_argument_parser():
     parser.add_argument("-v", "--var",
                         required=False,
                         action="append",
+                        default=[],
                         help="Variable to set, format: -v Key=Value.")
+
+    parser.add_argument("-f", "--var-file",
+                        required=False,
+                        help="Env file location.")
 
     return parser
 
@@ -59,7 +65,13 @@ def env(args):
     env_vars = get_env(args)
 
     for key, value in env_vars.items():
-        print("%s := %s" % (key, value))
+        print("%s = %s" % (key, value))
+
+
+def parse_var_entry(var_entry):
+    parts = var_entry.strip().split("=")
+
+    return (EB_ENV, parts[0], "=".join(parts[1:]))
 
 
 def env_set(args):
@@ -68,9 +80,17 @@ def env_set(args):
     option_settings = []
     skip_option_settings = []
 
+    if args.var_file:
+        with open(os.path.expanduser(args.var_file), "rb") as f:
+            option_settings.extend(map(parse_var_entry, f.readlines()))
+
+    if option_settings:
+        print "VAR FILE:"
+        for t, k, v in option_settings:
+            print "  %s = %s" % (k, v)
+
     for var in args.var:
-        parts = var.split("=")
-        entry = (EB_ENV, parts[0], "=".join(parts[1:]))
+        entry = parse_var_entry(var)
 
         if current_vars.get(entry[1], None) == entry[2]:
             skip_option_settings.append(entry)
@@ -106,7 +126,7 @@ def run(argv):
                             argv=argv,
                             postprocessors=[parameters.add_default_region])
 
-    if args.var:
+    if args.var or args.var_file:
         env_set(args)
     else:
         env(args)
