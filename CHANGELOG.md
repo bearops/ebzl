@@ -2,6 +2,7 @@
 
 ## 2015-07-28
 - set environment variables with `ebzl env --var-file PATH`
+- `--version` not required for `create`, `deploy` and `bundle` anymore
 
 ## 2015-07-26
 - set environment variables with `ebzl env -v FOO=BAR`

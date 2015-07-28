@@ -4,6 +4,7 @@ from . import (
     config,
     format as fmt
 )
+from ..modules import version
 
 
 def add_profile(parser, required=True):
@@ -20,9 +21,13 @@ def add_app_name(parser, required=True):
 
 
 def add_version_label(parser, required=True):
+    kwargs = {'required': required}
+    if not required:
+        kwargs['default'] = version.get_version()
+
     parser.add_argument("-v", "--version",
-                        required=required,
-                        help="Version label.")
+                        help="Version label.",
+                        **kwargs)
 
 
 def add_region(parser, required=True):
