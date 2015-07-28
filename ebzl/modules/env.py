@@ -45,7 +45,7 @@ def get_env(args):
             environment_name=args.env_name)
     except boto.exception.BotoServerError as exc:
         print(exc.message)
-        return
+        exit()
 
     env_vars = (data["DescribeConfigurationSettingsResponse"]
                     ["DescribeConfigurationSettingsResult"]
