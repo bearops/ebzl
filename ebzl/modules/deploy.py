@@ -9,7 +9,7 @@ import argparse
 
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl deploy")
-    
+
     parameters.add_profile(parser)
     parameters.add_version_label(parser)
     parameters.add_region(parser, required=False)

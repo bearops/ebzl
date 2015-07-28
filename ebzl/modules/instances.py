@@ -11,7 +11,7 @@ import boto
 
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl instances")
-    
+
     parameters.add_profile(parser)
     parameters.add_region(parser, required=False)
 

@@ -25,11 +25,11 @@ def get_argument_parser():
 
     parser.add_argument("--s3-bucket",
                         default="build-deps",
-                        help="AWS S3 bucket containing Docker Hub credentials.")
+                        help="S3 bucket containing Docker Hub credentials.")
 
     parser.add_argument("--s3-key",
                         default="generic/docker/.dockercfg",
-                        help="AWS S3 key name for Docker Hub credentials file.")
+                        help="S3 key name for Docker Hub credentials file.")
 
     parser.add_argument("-s", "--source-bundle",
                         default=".",
@@ -62,7 +62,8 @@ def get_source_bundle_file_path(args):
     path = os.path.abspath(os.path.expanduser(args.source_bundle))
 
     if os.path.isfile(path) and not args.force:
-        raise ValueError("Already exists, pass --force to overwrite: %s" % path)
+        raise ValueError("Already exists, pass --force to overwrite: %s"
+                         % path)
     elif os.path.isfile(path):
         return path
     elif os.path.isdir(path):
@@ -86,7 +87,7 @@ def run(argv):
     args = parameters.parse(parser=get_argument_parser(),
                             argv=argv)
 
-    try: 
+    try:
         path = get_source_bundle_file_path(args)
     except ValueError as exc:
         print("Incorrect source bundle path: %s" % exc)
