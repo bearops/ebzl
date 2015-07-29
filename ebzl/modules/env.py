@@ -74,6 +74,11 @@ def parse_var_entry(var_entry):
     return (EB_ENV, parts[0], "=".join(parts[1:]))
 
 
+def parse_var_file(fpath):
+    with open(os.path.expanduser(fpath), "rb") as f:
+        return map(parse_var_entry, f.readlines())
+
+
 def env_set(args):
     current_vars = get_env(args)
 
@@ -81,8 +86,7 @@ def env_set(args):
     skip_option_settings = []
 
     if args.var_file:
-        with open(os.path.expanduser(args.var_file), "rb") as f:
-            option_settings.extend(map(parse_var_entry, f.readlines()))
+        option_settings.extend(parse_var_file(args.var_file))
 
     for var in args.var:
         entry = parse_var_entry(var)

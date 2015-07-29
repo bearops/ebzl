@@ -1,6 +1,10 @@
 # Change log
 
 ## 2015-07-28
+- added `ecs` module for creating & running EC2 Container Service tasks
+- note: `ecs` uses `boto3`
+
+## 2015-07-28
 - set environment variables with `ebzl env --var-file PATH`
 - `--version` not required for `create`, `deploy` and `bundle` anymore
 
