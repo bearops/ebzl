@@ -53,6 +53,19 @@ def get_credentials(profile):
     return key, secret
 
 
+def get_credentials_dict(profile):
+    """Returns credentials as a dict (for use as kwargs).
+
+    :type profile: basestring
+    :rtype: dict
+    """
+
+    key, secret = get_credentials(profile)
+
+    return {"aws_access_key_id": key,
+            "aws_secret_access_key": secret}
+
+
 def get_profile_names():
     """Get available profile names.
 
