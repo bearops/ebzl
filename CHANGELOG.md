@@ -1,6 +1,6 @@
 # Change log
 
-## 2015-07-28
+## 2015-07-29
 - added `ecs` module for creating & running EC2 Container Service tasks
 - note: `ecs` uses `boto3`
 
