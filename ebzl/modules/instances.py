@@ -19,7 +19,7 @@ def get_argument_parser():
     group.add_argument("-e", "--env-name",
                        help="ElasticBeanstalk environment name.")
     group.add_argument("-n", "--name",
-                       help="Instance Name (tag).")
+                       help="Instance Name. Wilcards allowed.")
 
     return parser
 
@@ -53,15 +53,25 @@ def instance(args):
     ec2_conn = ec2.get_connection(args.profile, args.region)
     instances = ec2_conn.get_only_instances(filters={"tag:Name": args.name})
 
-    for i in instances:
+    max_name_len = 25
+
+    for i in sorted(instances, key=lambda x: x.tags.get("Name", "")):
         if i.state != "running":
             continue
 
         i.ip_address = i.ip_address or ""
 
-        print("%s %s %s" % (i.id,
-                            i.ip_address.center(15),
-                            i.private_ip_address.center(15)))
+        name = i.tags.get("Name", "?")
+        if len(name) > max_name_len:
+            name = "%s..." % i.tags.get("Name", "?")[:max_name_len - 3]
+
+        print("%s%s %s %s %s" % (
+            name,
+            " " * (max_name_len - len(name)),
+            i.id,
+            i.ip_address.center(15),
+            i.private_ip_address
+        ))
 
 
 def run(argv):
