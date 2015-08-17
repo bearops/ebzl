@@ -7,11 +7,17 @@ from . import (
 from ..modules import version
 
 
-def add_profile(parser, required=True):
+def add_profile(parser, required=True, honour_default=True):
+    kwargs = {"required": required}
+
+    if honour_default and config.has_default_profile():
+        kwargs["default"] = config.DEFAULT_PROFILE_NAME
+        kwargs["required"] = False
+
     parser.add_argument("-p", "--profile",
-                        required=required,
                         choices=config.get_profile_names(),
-                        help="AWS credentials profile.")
+                        help="AWS credentials profile.",
+                        **kwargs)
 
 
 def add_app_name(parser, required=True):

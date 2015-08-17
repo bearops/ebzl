@@ -11,6 +11,8 @@ AWS_CLI_CREDENTIALS_PATH = "~/.aws/credentials"
 
 AWS_CLI_CONFIG_PATH = "~/.aws/config"
 
+DEFAULT_PROFILE_NAME = "default"
+
 
 class NoConfigFoundException(Exception):
     """Config file not present."""
@@ -74,6 +76,15 @@ def get_profile_names():
     """
 
     return _get_config_parser(path=AWS_CLI_CREDENTIALS_PATH).sections()
+
+
+def has_default_profile():
+    """Is default profile present?
+
+    :rtype: bool
+    """
+
+    return DEFAULT_PROFILE_NAME in get_profile_names()
 
 
 def get_default_region(profile):
