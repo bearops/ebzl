@@ -1,7 +1,10 @@
 # Change log
 
+## 2015-08-19
+- add contribution guidelines: `CONTRIBUTING.md`
+
 ## 2015-08-17
-- Bump boto3 version to 1.1.1
+- bump boto3 version to 1.1.1
 - `ebzl instances -n` display Name tag value (and sorts the output by it)
 - respect default profile from `credentials` file
 
