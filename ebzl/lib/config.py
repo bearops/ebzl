@@ -11,7 +11,7 @@ AWS_CLI_CREDENTIALS_PATH = "~/.aws/credentials"
 
 AWS_CLI_CONFIG_PATH = "~/.aws/config"
 
-DEFAULT_PROFILE_NAME = "default"
+DEFAULT_PROFILE_NAME = os.getenv("AWS_DEFAULT_PROFILE", "default")
 
 
 class NoConfigFoundException(Exception):
