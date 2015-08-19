@@ -2,6 +2,7 @@
 
 ## 2015-08-19
 - add contribution guidelines: `CONTRIBUTING.md`
+- `AWS_DEFAULT_PROFILE` environment variable to allow user to specify default profile/credentials
 
 ## 2015-08-17
 - bump boto3 version to 1.1.1
