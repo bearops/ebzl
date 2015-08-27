@@ -1,6 +1,7 @@
 # Change log
 
 ## 2015-08-27
+- bug fix
 - `ebzl delete` for deleting Beanstalk application version
 
 ## 2015-08-19

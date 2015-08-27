@@ -15,7 +15,7 @@ def get_argument_parser():
 
     parameters.add_profile(parser)
     parameters.add_app_name(parser)
-    parameters.add_version_label(parser, required=False)
+    parameters.add_version_label(parser, required=True)
     parameters.add_region(parser, required=False)
 
     return parser
