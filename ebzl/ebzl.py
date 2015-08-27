@@ -4,6 +4,7 @@ import argparse
 from .modules import (
     bundle,
     create,
+    delete,
     deploy,
     ecs,
     env,
@@ -17,6 +18,7 @@ from .modules import (
 _MODULES = {
     "bundle": bundle,
     "create": create,
+    "delete": delete,
     "deploy": deploy,
     "ecs": ecs,
     "env": env,

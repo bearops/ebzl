@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-08-27
+- `ebzl delete` for deleting Beanstalk application version
+
 ## 2015-08-19
 - add contribution guidelines: `CONTRIBUTING.md`
 - `AWS_DEFAULT_PROFILE` environment variable to allow user to specify default profile/credentials

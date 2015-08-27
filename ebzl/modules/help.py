@@ -3,6 +3,7 @@ import argparse
 from .. modules import (
     bundle,
     create,
+    delete,
     deploy,
     ecs,
     env,
@@ -12,32 +13,21 @@ from .. modules import (
 )
 
 
+MODULES_DICT = {
+    "bundle": bundle,
+    "create": create,
+    "delete": delete,
+    "deploy": deploy,
+    "ecs": ecs,
+    "env": env,
+    "instances": instances,
+    "list": list_,
+    "version": version
+}
+
+
 def get_module_list():
-    return [
-        "bundle",
-        "create",
-        "deploy",
-        "ecs",
-        "env",
-        "instances",
-        "list",
-        "version"
-    ]
-
-
-def get_module(name):
-    d = {
-        "bundle": bundle,
-        "create": create,
-        "deploy": deploy,
-        "ecs": ecs,
-        "env": env,
-        "instances": instances,
-        "list": list_,
-        "version": version
-    }
-
-    return d.get(name)
+    return MODULES_DICT.keys()
 
 
 def get_argument_parser():
@@ -52,7 +42,7 @@ def get_argument_parser():
 def run(argv):
     args = get_argument_parser().parse_args(argv)
     try:
-        get_module(args.action).get_argument_parser().print_help()
+        MODULES_DICT.get(args.action).get_argument_parser().print_help()
     except AttributeError:
         print("Module not found: %s" % args.action)
         exit()
