@@ -13,10 +13,7 @@ def get_argument_parser():
     parameters.add_profile(parser)
     parameters.add_version_label(parser, required=False)
     parameters.add_region(parser, required=False)
-
-    parser.add_argument("-e", "--env-name",
-                        required=True,
-                        help="ElasticBeanstalk environment name.")
+    parameters.add_env_name(parser, required=True)
 
     return parser
 

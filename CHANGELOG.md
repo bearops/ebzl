@@ -1,5 +1,9 @@
 # Change log
 
+## 2015-09-15
+- `ebzl list -a $applicationName -E` to list application's environments
+- `ebzl version -e $environmentName` to get the version that the environment is running
+
 ## 2015-08-27
 - bug fix
 - `ebzl delete` for deleting Beanstalk application version

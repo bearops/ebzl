@@ -20,6 +20,7 @@ def get_argument_parser():
 
     return parser
 
+
 def delete_eb_version(args):
     layer1 = eb.get_layer1(profile=args.profile, region=args.region)
 

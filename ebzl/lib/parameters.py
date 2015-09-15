@@ -36,6 +36,12 @@ def add_version_label(parser, required=True):
                         **kwargs)
 
 
+def add_env_name(parser, required=True):
+    parser.add_argument("-e", "--env-name",
+                        required=required,
+                        help="ElasticBeanstalk environment name.")
+
+
 def add_region(parser, required=True):
     parser.add_argument("-r", "--region",
                         required=required,
