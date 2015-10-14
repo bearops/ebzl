@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-10-14
+- added a license file
+
 ## 2015-09-15
 - `ebzl list -a $applicationName -E` to list application's environments
 - `ebzl version -e $environmentName` to get the version that the environment is running

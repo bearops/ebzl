@@ -30,3 +30,7 @@ ebzl help
 - `instances`: list instances for given Beanstalk environment or matching a name pattern.
 - `list`: list available Beanstalk applications, environments and versions.
 - `version`: get project's or Beanstalk environment version.
+
+# License
+
+We're using BSD-3. Please refer to [the license file](https://github.com/bearops/ebzl/blob/master/LICENSE) for details.
