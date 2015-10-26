@@ -33,4 +33,4 @@ ebzl help
 
 # License
 
-We're using BSD-3. Please refer to [the license file](https://github.com/bearops/ebzl/blob/master/LICENSE) for details.
+We're using BSD-3. Please refer to [the license file](LICENSE) for details.
