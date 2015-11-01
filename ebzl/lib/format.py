@@ -48,6 +48,21 @@ def print_list(list_, format_=None):
         print(json.dumps(list_))
 
 
+def print_table(rows, separator=" "):
+    columns = max(map(len, rows))
+    widths = [0] * columns
+
+    for column in range(columns):
+        for row in rows:
+            length = len(row[column])
+            if length > widths[column]:
+                widths[column] = length
+
+    for row in rows:
+        print separator.join(["%s%s" % (value, " " * (widths[index] - len(str(value))))
+                              for index, value in enumerate(row)])
+
+
 def print_profile(profile, format_=None):
     """Print profile header."""
 

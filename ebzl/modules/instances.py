@@ -3,7 +3,8 @@ import argparse
 from .. lib import (
     parameters,
     eb,
-    ec2
+    ec2,
+    format as fmt
 )
 
 import boto
@@ -44,34 +45,33 @@ def env(args):
     ec2_conn = ec2.get_connection(args.profile, args.region)
     instances = ec2_conn.get_only_instances(instance_ids=instance_ids)
 
+    rows = []
+
     for i in instances:
-        print("%s-%s\tansible_ssh_host=%s\tansible_ssh_user=ec2-user" % (
-            args.env_name, i.id, i.private_ip_address))
+        rows.append(["%s-%s" % (args.env_name, i.id),
+                     "ansible_ssh_host=%s" % i.private_ip_address,
+                     "ansible_ssh_user=ec2-user"])
+
+    fmt.print_table(rows, separator=" " * 4)
 
 
 def instance(args):
     ec2_conn = ec2.get_connection(args.profile, args.region)
     instances = ec2_conn.get_only_instances(filters={"tag:Name": args.name})
 
-    max_name_len = 25
+    rows = [["NAME", "ID", "IP", "PRIVATE IP", "STACK"]]
 
     for i in sorted(instances, key=lambda x: x.tags.get("Name", "")):
         if i.state != "running":
             continue
 
-        i.ip_address = i.ip_address or ""
+        rows.append([i.tags.get("Name", ""),
+                     i.id,
+                     i.ip_address or "",
+                     i.private_ip_address,
+                     i.tags.get("aws:cloudformation:stack-name", "")])
 
-        name = i.tags.get("Name", "?")
-        if len(name) > max_name_len:
-            name = "%s..." % i.tags.get("Name", "?")[:max_name_len - 3]
-
-        print("%s%s %s %s %s" % (
-            name,
-            " " * (max_name_len - len(name)),
-            i.id,
-            i.ip_address.center(15),
-            i.private_ip_address
-        ))
+    fmt.print_table(rows)
 
 
 def run(argv):

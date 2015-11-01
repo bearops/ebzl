@@ -1,5 +1,9 @@
 # Change log
 
+## 2015-11-01
+- add `format.print_table`
+- use `format.print_table` for `instances` module
+
 ## 2015-10-14
 - added a license file
 
