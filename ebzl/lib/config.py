@@ -33,9 +33,7 @@ def _get_config_parser(path):
         with open(os.path.expanduser(path), "rb") as f:
             config_parser.readfp(f)
     except IOError:
-        raise NoConfigFoundException(
-            "Can't find the config file: %s"
-            % config_paths)
+        raise NoConfigFoundException("Can't find the config file: %s" % path)
     else:
         return config_parser
 
