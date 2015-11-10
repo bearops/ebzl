@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-11-10
+- bug fix: strip variable names when using `ebzl env` with `--var-file`
+
 ## 2015-11-01
 - add `format.print_table`
 - use `format.print_table` for `instances` module

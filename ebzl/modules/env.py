@@ -71,7 +71,7 @@ def env(args):
 def parse_var_entry(var_entry):
     parts = var_entry.strip().split("=")
 
-    return (EB_ENV, parts[0], "=".join(parts[1:]))
+    return (EB_ENV, parts[0].strip(), "=".join(parts[1:]).strip())
 
 
 def parse_var_file(fpath):
