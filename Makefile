@@ -9,9 +9,9 @@ upload-wheel: build-wheel
 	twine upload dist/*
 
 install:
-	pip install -e .
+	sudo pip install -e .
 
 clean:
-	-rm -rf build dist ebzl.egg-info
+	-sudo rm -rf build dist ebzl.egg-info
 
 all: build-wheel upload-wheel clean

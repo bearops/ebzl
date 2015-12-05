@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-12-05
+- use a wildcard as a default name filter in `ebzl instances` (`--name="*"`)
+
 ## 2015-11-10
 - bug fix: strip variable names when using `ebzl env` with `--var-file`
 

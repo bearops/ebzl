@@ -20,6 +20,7 @@ def get_argument_parser():
     group.add_argument("-e", "--env-name",
                        help="ElasticBeanstalk environment name.")
     group.add_argument("-n", "--name",
+                       default="*",
                        help="Instance Name. Wilcards allowed.")
 
     return parser
