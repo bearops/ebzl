@@ -1,5 +1,8 @@
 # Change log
 
+## 2015-12-08
+- update `boto` to 1.2.2
+
 ## 2015-12-05
 - use a wildcard as a default name filter in `ebzl instances` (`--name="*"`)
 
