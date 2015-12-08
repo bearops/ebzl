@@ -16,7 +16,7 @@ def get_argument_parser():
     parameters.add_profile(parser)
     parameters.add_region(parser, required=False)
 
-    group = parser.add_mutually_exclusive_group(required=True)
+    group = parser.add_mutually_exclusive_group()
     group.add_argument("-e", "--env-name",
                        help="ElasticBeanstalk environment name.")
     group.add_argument("-n", "--name",
