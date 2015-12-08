@@ -92,7 +92,10 @@ def get_profile_names():
     :returns: list of profile names (strings)
     """
 
-    return _get_config_parser(path=AWS_CLI_CREDENTIALS_PATH).sections()
+    try:
+        return _get_config_parser(path=AWS_CLI_CREDENTIALS_PATH).sections()
+    except NoConfigFoundException:
+        return []
 
 
 def has_default_profile():
@@ -112,7 +115,10 @@ def get_default_region(profile):
     :returns: name of defalt region if defined in config, None otherwise
     """
 
-    config = _get_config_parser(path=AWS_CLI_CONFIG_PATH)
+    try:
+        config = _get_config_parser(path=AWS_CLI_CONFIG_PATH)
+    except NoConfigFoundException:
+        return None
 
     try:
         return config.get("profile %s" % profile, "region")

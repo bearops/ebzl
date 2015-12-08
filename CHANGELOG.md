@@ -1,5 +1,8 @@
 # Change log
 
+## [0.9.10] - 2015-12-08
+- only complain about `~/.aws` missing if it's required
+
 ## [0.9.9] - 2015-12-08
 - update `boto` to 1.2.2
 - fix for wilcard default name filter in `ebzl instances`
