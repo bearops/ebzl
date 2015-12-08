@@ -1,6 +1,6 @@
 # Change log
 
-## 2015-12-08
+## [0.9.9] - 2015-12-08
 - update `boto` to 1.2.2
 - fix for wilcard default name filter in `ebzl instances`
 - try to fetch AWS credentials from the environment if profile name not provided
