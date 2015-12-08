@@ -3,6 +3,7 @@
 ## 2015-12-08
 - update `boto` to 1.2.2
 - fix for wilcard default name filter in `ebzl instances`
+- try to fetch AWS credentials from the environment if profile name not provided
 
 ## 2015-12-05
 - use a wildcard as a default name filter in `ebzl instances` (`--name="*"`)

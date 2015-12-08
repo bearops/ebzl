@@ -14,7 +14,7 @@ DEFAULT_SOURCE_BUNDLE_NAME = "source-bundle.zip"
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl bundle")
 
-    parameters.add_profile(parser)
+    parameters.add_profile(parser, required=False)
     parameters.add_app_name(parser)
     parameters.add_region(parser, required=False)
     parameters.add_version_label(parser, required=False)

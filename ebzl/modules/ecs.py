@@ -16,7 +16,7 @@ import argparse
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl ecs")
 
-    parameters.add_profile(parser)
+    parameters.add_profile(parse, required=False)
     parameters.add_region(parser, required=False)
 
     subparsers = parser.add_subparsers()

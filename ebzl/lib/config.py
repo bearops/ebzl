@@ -38,12 +38,31 @@ def _get_config_parser(path):
         return config_parser
 
 
-def get_credentials(profile):
-    """Returns credentials for given profile as a (key, secret) tuple.
+def _get_credentials_from_environment():
+    key = os.environ.get("AWS_ACCESS_KEY_ID")
+    secret = os.environ.get("AWS_SECRET_ACCESS_KEY")
+
+    return key, secret
+
+
+def get_credentials(profile=None):
+    """Returns AWS credentials.
+
+    Reads ~/.aws/credentials if the profile name is given or tries
+    to get them from environment otherwise. Returns a (key, secret)
+    tuple.
 
     :type profile: basestring
     :rtype: tuple
     """
+
+    if profile is None:
+        key, secret = _get_credentials_from_environment()
+
+        if key is not None and secret is not None:
+            return key, secret
+
+        raise NoConfigFoundException("AWS credentials not found.")
 
     config = _get_config_parser(path=AWS_CLI_CREDENTIALS_PATH)
 

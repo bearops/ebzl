@@ -9,7 +9,7 @@ import argparse
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl list")
 
-    parameters.add_profile(parser)
+    parameters.add_profile(parser, required=False)
     parameters.add_app_name(parser, required=False)
     parameters.add_region(parser, required=False)
 

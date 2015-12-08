@@ -13,7 +13,7 @@ import boto
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl instances")
 
-    parameters.add_profile(parser)
+    parameters.add_profile(parser, required=False)
     parameters.add_region(parser, required=False)
 
     group = parser.add_mutually_exclusive_group()
