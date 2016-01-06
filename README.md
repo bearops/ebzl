@@ -20,8 +20,8 @@ ebzl help
 
 ## Modules
 
-| Module | Description |
-| -------- | -------------------------------------- |
+| Name | Description |
+| --- | --- |
 | `bundle` | Create and upload Beanstalk source bundle for Docker deployments. |
 | `create` | Create Beanstalk application version. |
 | `delete` | Delete Beanstalk application version. |
