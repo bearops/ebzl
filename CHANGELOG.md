@@ -1,5 +1,8 @@
 # Change log
 
+## [0.9.11] - 2016-01-06
+- fix `env` parameters typo
+
 ## [0.9.10] - 2015-12-08
 - only complain about `~/.aws` missing if it's required
 

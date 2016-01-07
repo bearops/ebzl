@@ -16,7 +16,7 @@ EB_ENV = "aws:elasticbeanstalk:application:environment"
 def get_argument_parser():
     parser = argparse.ArgumentParser("ebzl env")
 
-    parameters.add_profile(parser, profile=False)
+    parameters.add_profile(parser, required=False)
     parameters.add_region(parser, required=False)
 
     parser.add_argument("-e", "--env-name",
