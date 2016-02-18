@@ -1,5 +1,8 @@
 # Change log
 
+## [0.9.12] - 2016-02-18
+- `ebzl bundle` supports adding .ebextensions now
+
 ## [0.9.11] - 2016-01-06
 - fix `env` parameters typo
 

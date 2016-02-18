@@ -35,6 +35,10 @@ def get_argument_parser():
                         default=".",
                         help="Source bundle destination path.")
 
+    parser.add_argument("-x", "--eb-extensions",
+                        help=("Path to .ebextensions directory. Its contents "
+                              "will be added to the source bundle."))
+
     return parser
 
 
@@ -78,9 +82,25 @@ def get_source_bundle_file_path(args):
     raise NotImplementedError("I have no idea what I'm doing.")
 
 
-def write_source_bundle(path, dockerrun_contents):
+def write_source_bundle(path, dockerrun_contents, eb_extensions_dir):
+    if eb_extensions_dir is not None:
+        eb_extensions_dir = os.path.expanduser(eb_extensions_dir)
+
+        if not os.path.isdir(eb_extensions_dir):
+            raise ValueError(".ebextensions dir doesn't exist: %s"
+                             % eb_extensions_dir)
+
+        eb_extensions = [(os.path.join(eb_extensions_dir, fname),
+                          ".ebextensions/%s" % fname)
+                         for fname in os.listdir(eb_extensions_dir)]
+    else:
+        eb_extensions = []
+
     with zipfile.ZipFile(path, "w") as f:
         f.writestr("Dockerrun.aws.json", dockerrun_contents)
+
+        for fpath, arcpath in eb_extensions:
+            f.write(fpath, arcpath)
 
 
 def run(argv):
@@ -94,4 +114,4 @@ def run(argv):
         exit()
 
     dockerrun_contents = get_docker_run_contents(args)
-    write_source_bundle(path, dockerrun_contents)
+    write_source_bundle(path, dockerrun_contents, args.eb_extensions)

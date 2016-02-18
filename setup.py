@@ -10,7 +10,7 @@ requirements = [str(ir.req)
 
 setup(
     name="ebzl",
-    version="0.9.11",
+    version="0.9.12",
     description="AWS ElasticBeanstalk management helper",
     url="http://github.com/bearops/ebzl",
     author='Wojciech Gaca',
