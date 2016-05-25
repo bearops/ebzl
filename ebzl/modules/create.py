@@ -37,7 +37,7 @@ def get_source_bundle_key_name(app_name, version):
 def upload_source_bundle(args):
     source_bundle_path = os.path.expanduser(args.source_bundle)
 
-    s3_conn = s3.get_connection(profile_name=args.profile)
+    s3_conn = s3.get_connection(profile_name=args.profile, region=args.region)
 
     try:
         bucket = s3_conn.get_bucket(args.s3_bucket)
